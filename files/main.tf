@@ -53,7 +53,6 @@ resource "aws_security_group" "k8s-security-group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
 
 resource "aws_instance" "ci-sockshop-k8s-master" {
   instance_type   = "${var.master_instance_type}"
