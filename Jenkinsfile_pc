@@ -1,6 +1,6 @@
 node {
 environment {
-    PRISMA_API_URL='https://api.eu.prismacloud.io'
+    PRISMA_API_URL='https://api.prismacloud.io'
  }
 stage('Clone repository') {
  checkout scm       
@@ -10,7 +10,7 @@ stage('Scan SCA from pom file') {
    script { 
        docker.image('bridgecrew/checkov:latest').inside("--entrypoint=''")  {     
            try {
-               sh 'checkov -f pom.xml --use-enforcement-rules -o cli -o junitxml --output-file-path console,results.xml --prisma-api-url https://api.eu.prismacloud.io  --bc-api-key ${ACCESS_KEY}::${SECRET_KEY} --repo-id rbenavente/evil.sca --branch main'
+               sh 'checkov -f pom.xml --use-enforcement-rules -o cli -o junitxml --output-file-path console,results.xml --prisma-api-url https://api.prismacloud.io  --bc-api-key ${ACCESS_KEY}::${SECRET_KEY} --repo-id rbenavente/evil.sca --branch main'
                               junit skipPublishingChecks: true, testResults: 'results.xml'
               } catch (err) {
                               junit skipPublishingChecks: true, testResults: 'results.xml'
